@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        font-family: Poppins, sans-serif;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+        width: 100%;
+        font-style: 16px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .container {
+        border: 1px solid #000;
+        border-radius: 5px;
+        height: fit-content;
+        width: fit-content;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <img src="" alt="Cat image" width="200px" />
+      <br />
+      <button>Generate Image</button>
+    </div>
+    <script>
+      const catImage = document.querySelector("img");
+      const imageButton = document.querySelector("button");
+
+      async function catImageGenerator() {
+        try {
+          const res = await fetch(`https://api.thecatapi.com/v1/images/search`);
+          const data = await res.json();
+          catImage.src = data[0].url;
+        } catch (err) {
+          console.log(err);
+        }
+      }
+      //   catImageGenerator();
+      imageButton.addEventListener("click", catImageGenerator);
+    </script>
+  </body>
+</html>
